@@ -16,7 +16,7 @@ export async function POST() {
     body: "Push notifications are working. You'll get reminders here.",
     kind: "test",
     url: "/today",
-    tag: "osama-test",
+    tag: "cairn-test",
   })));
   const ok = results.filter((r) => r.ok).length;
   return NextResponse.json({ sent: ok, total: subs.length });

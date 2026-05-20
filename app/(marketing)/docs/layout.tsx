@@ -7,7 +7,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
         <aside className="lg:sticky lg:top-24 lg:self-start">
           <DocsNav />
         </aside>
-        <article className="prose-osama max-w-[68ch] min-w-0">
+        <article className="prose-cairn max-w-[68ch] min-w-0">
           {children}
         </article>
       </div>

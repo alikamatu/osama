@@ -17,7 +17,7 @@ type Ctx = {
 };
 const KeyboardContext = createContext<Ctx | null>(null);
 
-const RECENT_KEY = "osama:recent-routes";
+const RECENT_KEY = "cairn:recent-routes";
 const RECENT_MAX = 6;
 
 export function KeyboardProvider({ children }: { children: React.ReactNode }) {
@@ -46,8 +46,8 @@ export function KeyboardProvider({ children }: { children: React.ReactNode }) {
       }
     }
 
-    window.addEventListener("osama:quickadd", onQuickAddEvent);
-    return () => window.removeEventListener("osama:quickadd", onQuickAddEvent);
+    window.addEventListener("cairn:quickadd", onQuickAddEvent);
+    return () => window.removeEventListener("cairn:quickadd", onQuickAddEvent);
   }, [addTask, addHabit, addNote, addGoal]);
 
   // Track recent routes for the palette.
@@ -105,7 +105,7 @@ export function KeyboardProvider({ children }: { children: React.ReactNode }) {
 
   const handleQuickAdd = useCallback((kind: string, title: string) => {
     window.dispatchEvent(
-      new CustomEvent("osama:quickadd", { detail: { kind, title } }),
+      new CustomEvent("cairn:quickadd", { detail: { kind, title } }),
     );
   }, []);
 

@@ -45,7 +45,7 @@ export function Logo({ size = 28, withWordmark = false, className }: {
       </motion.svg>
       {withWordmark && (
         <span className="select-none text-[15px] font-semibold tracking-tight text-fg">
-          osama
+          cairn
         </span>
       )}
     </div>

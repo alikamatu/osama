@@ -8,7 +8,7 @@ import { useMemo } from "react";
 
 export function Markdown({ source }: { source: string }) {
   const html = useMemo(() => renderMarkdown(source), [source]);
-  return <div className="prose-osama" dangerouslySetInnerHTML={{ __html: html }} />;
+  return <div className="prose-cairn" dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
 function escape(s: string) {

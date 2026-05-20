@@ -116,5 +116,5 @@ export function buildReference(email: string): string {
   const ts = Date.now().toString(36);
   const rand = Math.random().toString(36).slice(2, 8);
   const safe = email.replace(/[^a-z0-9]/gi, "").slice(0, 12).toLowerCase();
-  return `osama_${safe}_${ts}_${rand}`;
+  return `cairn_${safe}_${ts}_${rand}`;
 }

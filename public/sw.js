@@ -1,6 +1,6 @@
 /* Cairn service worker — PWA shell cache + Web Push */
 
-const VERSION = "osama-sw-v1";
+const VERSION = "cairn-sw-v1";
 const SHELL_CACHE = `${VERSION}-shell`;
 const RUNTIME_CACHE = `${VERSION}-rt`;
 
@@ -101,7 +101,7 @@ self.addEventListener("push", (event) => {
     icon: "/icon.svg",
     badge: "/icon-mask.svg",
     data: { url: data.url || "/today", kind: data.kind || "generic" },
-    tag: data.tag || "osama-notification",
+    tag: data.tag || "cairn-notification",
     renotify: Boolean(data.renotify),
     requireInteraction: false,
   };

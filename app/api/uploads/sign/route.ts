@@ -18,7 +18,7 @@ export async function POST(req: Request) {
   }
 
   const safeEmail = session.email.replace(/[^a-z0-9_]+/gi, "_").toLowerCase();
-  const folder = `osama/${parsed.data.kind}s/${safeEmail}`;
+  const folder = `cairn/${parsed.data.kind}s/${safeEmail}`;
   const signed = signUpload(folder);
   return NextResponse.json(signed);
 }

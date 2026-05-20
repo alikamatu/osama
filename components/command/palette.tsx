@@ -64,7 +64,7 @@ export function CommandPalette({
 
     if (scored.length === 0) {
       return [{
-        id: "ask-osama",
+        id: "ask-cairn",
         group: "Ask" as CommandGroup,
         label: `Ask Cairn: "${q}"`,
         icon: Sparkles,

@@ -151,11 +151,11 @@ export function downloadBlob(filename: string, content: string, mime: string) {
 }
 
 export function downloadJSON(snap: ExportSnapshot) {
-  downloadBlob(`osama-${snap.exportedAt.slice(0, 10)}.json`, toJSON(snap), "application/json");
+  downloadBlob(`cairn-${snap.exportedAt.slice(0, 10)}.json`, toJSON(snap), "application/json");
 }
 export function downloadMarkdown(snap: ExportSnapshot) {
-  downloadBlob(`osama-${snap.exportedAt.slice(0, 10)}.md`, toMarkdown(snap), "text/markdown");
+  downloadBlob(`cairn-${snap.exportedAt.slice(0, 10)}.md`, toMarkdown(snap), "text/markdown");
 }
 export function downloadCSV(snap: ExportSnapshot) {
-  downloadBlob(`osama-tasks-${snap.exportedAt.slice(0, 10)}.csv`, toCSV(snap), "text/csv");
+  downloadBlob(`cairn-tasks-${snap.exportedAt.slice(0, 10)}.csv`, toCSV(snap), "text/csv");
 }

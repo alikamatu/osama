@@ -136,18 +136,18 @@ body {
 }
 
 /* Long-form prose for docs / legal pages */
-.prose-osama h1 { font-size: 36px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 12px; color: var(--fg); }
-.prose-osama h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; margin: 40px 0 12px; color: var(--fg); }
-.prose-osama h3 { font-size: 17px; font-weight: 600; line-height: 1.3; margin: 28px 0 8px; color: var(--fg); }
-.prose-osama p, .prose-osama li { font-size: 15px; line-height: 1.7; color: var(--fg-muted); }
-.prose-osama p { margin: 0 0 14px; }
-.prose-osama ul, .prose-osama ol { margin: 0 0 16px; padding-left: 22px; }
-.prose-osama li { margin: 4px 0; }
-.prose-osama a { color: var(--accent); text-decoration: none; }
-.prose-osama a:hover { text-decoration: underline; text-underline-offset: 3px; }
-.prose-osama code { font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 13px; background: var(--surface-2); padding: 2px 6px; border-radius: 4px; color: var(--fg); }
-.prose-osama pre { background: var(--surface-1); padding: 16px; border-radius: 12px; overflow-x: auto; margin: 16px 0; }
-.prose-osama pre code { background: transparent; padding: 0; }
-.prose-osama strong { color: var(--fg); font-weight: 600; }
-.prose-osama kbd { background: var(--surface-2); color: var(--fg); padding: 2px 6px; border-radius: 4px; font-family: var(--font-geist-mono), monospace; font-size: 12px; }
-.prose-osama hr { border: 0; height: 1px; background: var(--hairline); margin: 32px 0; }
+.prose-cairn h1 { font-size: 36px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 12px; color: var(--fg); }
+.prose-cairn h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; margin: 40px 0 12px; color: var(--fg); }
+.prose-cairn h3 { font-size: 17px; font-weight: 600; line-height: 1.3; margin: 28px 0 8px; color: var(--fg); }
+.prose-cairn p, .prose-cairn li { font-size: 15px; line-height: 1.7; color: var(--fg-muted); }
+.prose-cairn p { margin: 0 0 14px; }
+.prose-cairn ul, .prose-cairn ol { margin: 0 0 16px; padding-left: 22px; }
+.prose-cairn li { margin: 4px 0; }
+.prose-cairn a { color: var(--accent); text-decoration: none; }
+.prose-cairn a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.prose-cairn code { font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 13px; background: var(--surface-2); padding: 2px 6px; border-radius: 4px; color: var(--fg); }
+.prose-cairn pre { background: var(--surface-1); padding: 16px; border-radius: 12px; overflow-x: auto; margin: 16px 0; }
+.prose-cairn pre code { background: transparent; padding: 0; }
+.prose-cairn strong { color: var(--fg); font-weight: 600; }
+.prose-cairn kbd { background: var(--surface-2); color: var(--fg); padding: 2px 6px; border-radius: 4px; font-family: var(--font-geist-mono), monospace; font-size: 12px; }
+.prose-cairn hr { border: 0; height: 1px; background: var(--hairline); margin: 32px 0; }
