@@ -57,7 +57,7 @@ export function toMarkdown(snap: ExportSnapshot): string {
   const projById = new Map(snap.projects.map((p) => [p.id, p]));
   const out: string[] = [];
 
-  out.push(`# Osama export`);
+  out.push(`# Cairn export`);
   out.push(`_Exported ${new Date(snap.exportedAt).toLocaleString()}_`);
   out.push("");
   out.push(`- ${snap.tasks.length} tasks`);

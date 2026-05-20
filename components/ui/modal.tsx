@@ -44,12 +44,22 @@ export function Modal({
     }
     window.addEventListener("keydown", onKey);
 
-    // Focus the first focusable element.
+    // Focus the first input/textarea (or fall back to a non-close button).
+    // The close "X" button is in the header and would otherwise win by DOM
+    // order — stealing focus from the form's autoFocus input.
     const t = setTimeout(() => {
       const root = ref.current;
-      const focusable = root?.querySelector<HTMLElement>(
-        'input:not([disabled]), textarea:not([disabled]), button:not([disabled])',
-      );
+      if (!root) return;
+      // If something inside the modal already has focus (e.g. an input with
+      // autoFocus), leave it alone.
+      if (root.contains(document.activeElement)) return;
+      const focusable =
+        root.querySelector<HTMLElement>(
+          'input:not([disabled]):not([type="hidden"]), textarea:not([disabled]), [contenteditable="true"]',
+        ) ??
+        root.querySelector<HTMLElement>(
+          'button:not([disabled]):not([aria-label="Close"]), [tabindex="0"]:not([disabled])',
+        );
       focusable?.focus();
     }, 30);
 
@@ -107,7 +117,9 @@ export function Modal({
                 <button
                   type="button"
                   onClick={() => onOpenChange(false)}
+                  onMouseDown={(e) => e.preventDefault()}
                   aria-label="Close"
+                  tabIndex={-1}
                   className="grid h-8 w-8 shrink-0 place-items-center rounded-md text-fg-subtle hover:bg-surface-2 hover:text-fg"
                 >
                   <X size={15} strokeWidth={2} />

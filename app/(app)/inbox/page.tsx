@@ -67,7 +67,7 @@ export default function InboxPage() {
             </span>
             <span className="text-fg-subtle">·</span>
             <span className="text-[11px] text-fg-subtle">
-              Forward to <span className="font-mono text-fg-muted">in@osama.app</span> (soon)
+              Forward to <span className="font-mono text-fg-muted">in@assistant.alikamatu.com</span> (soon)
             </span>
           </div>
         </div>

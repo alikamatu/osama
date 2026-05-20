@@ -22,7 +22,7 @@ export default function IntegrationsSettings() {
 
       <SettingsSection title="Email-in" description="A unique address that captures into your Inbox.">
         <SettingsRow label="Your address" hint="Forward emails here and they'll appear in your inbox.">
-          <span className="rounded-md bg-surface-2 px-2 py-1 font-mono text-[12px] text-fg-muted">in-<span className="text-fg">you</span>@osama.app</span>
+          <span className="rounded-md bg-surface-2 px-2 py-1 font-mono text-[12px] text-fg-muted">in-<span className="text-fg">you</span>@assistant.alikamatu.com</span>
         </SettingsRow>
         <p className="text-[12px] text-fg-subtle">
           <Mail size={11} strokeWidth={2} className="mr-1 inline" />

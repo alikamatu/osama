@@ -9,19 +9,19 @@ export function magicLinkEmail({
   email: string;
   expiresInMinutes: number;
 }) {
-  const subject = "Your Osama sign-in link";
+  const subject = "Your Cairn sign-in link";
 
   const text = [
     `Hi,`,
     ``,
-    `Click the link below to sign in to Osama as ${email}.`,
+    `Click the link below to sign in to Cairn as ${email}.`,
     `This link expires in ${expiresInMinutes} minutes and can only be used once.`,
     ``,
     url,
     ``,
     `If you didn't request this email, you can safely ignore it.`,
     ``,
-    `— Osama`,
+    `— Cairn`,
   ].join("\n");
 
   const html = `<!doctype html>
@@ -35,7 +35,7 @@ export function magicLinkEmail({
               <td style="padding-bottom:24px;">
                 <div style="display:inline-flex;align-items:center;gap:10px;">
                   <span style="display:inline-block;width:28px;height:28px;border-radius:50%;background:#a78bfa;"></span>
-                  <span style="font-size:15px;font-weight:600;letter-spacing:-0.01em;color:#fff;">Osama</span>
+                  <span style="font-size:15px;font-weight:600;letter-spacing:-0.01em;color:#fff;">Cairn</span>
                 </div>
               </td>
             </tr>
@@ -50,7 +50,7 @@ export function magicLinkEmail({
                 </p>
                 <a href="${url}"
                    style="display:inline-block;background:#a78bfa;color:#15121f;text-decoration:none;padding:14px 22px;border-radius:12px;font-weight:600;font-size:14px;">
-                  Sign in to Osama
+                  Sign in to Cairn
                 </a>
                 <p style="margin:28px 0 0;font-size:13px;line-height:1.55;color:#7d808a;">
                   Or paste this link into your browser:
@@ -68,7 +68,7 @@ export function magicLinkEmail({
               </td>
             </tr>
           </table>
-          <p style="margin:16px 0 0;font-size:11px;color:#6c6f78;">© ${new Date().getFullYear()} Osama</p>
+          <p style="margin:16px 0 0;font-size:11px;color:#6c6f78;">© ${new Date().getFullYear()} Cairn</p>
         </td>
       </tr>
     </table>

@@ -1,4 +1,4 @@
-/* Osama service worker — PWA shell cache + Web Push */
+/* Cairn service worker — PWA shell cache + Web Push */
 
 const VERSION = "osama-sw-v1";
 const SHELL_CACHE = `${VERSION}-shell`;
@@ -95,7 +95,7 @@ self.addEventListener("push", (event) => {
   let data = {};
   try { data = event.data ? event.data.json() : {}; } catch { data = { body: event.data ? event.data.text() : "" }; }
 
-  const title = data.title || "Osama";
+  const title = data.title || "Cairn";
   const opts = {
     body: data.body || "",
     icon: "/icon.svg",

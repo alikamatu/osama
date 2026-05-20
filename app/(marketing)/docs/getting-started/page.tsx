@@ -13,7 +13,7 @@ export default function Page() {
       <h2>2. Onboarding</h2>
       <p>The wizard asks for four things:</p>
       <ul>
-        <li><strong>Display name</strong> — how Osama greets you each morning.</li>
+        <li><strong>Display name</strong> — how Cairn greets you each morning.</li>
         <li><strong>Avatar</strong> — pick one from the gallery; you can change this any time.</li>
         <li><strong>Theme</strong> — five built-in themes. Try them all; they&apos;re live preview.</li>
         <li><strong>Timezone &amp; start of week</strong> — we auto-detect the timezone; confirm or override.</li>
@@ -21,7 +21,7 @@ export default function Page() {
 
       <h2>3. The daily rhythm</h2>
       <p>
-        Osama is opinionated about one thing: every day starts on the <strong>Today</strong> board. The shape of the board is:
+        Cairn is opinionated about one thing: every day starts on the <strong>Today</strong> board. The shape of the board is:
       </p>
       <ul>
         <li><strong>Habits row</strong> — tap to check off; streaks update instantly.</li>

@@ -185,7 +185,7 @@ export default function ChatThread({ params }: { params: Promise<{ threadId: str
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
-              placeholder="Ask Osama — Enter to send, Shift+Enter newline."
+              placeholder="Ask Cairn — Enter to send, Shift+Enter newline."
               rows={2}
               disabled={streaming}
               className="flex-1 resize-none bg-transparent px-3 py-2 text-[14px] text-fg outline-none placeholder:text-fg-subtle disabled:opacity-60"

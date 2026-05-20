@@ -4,7 +4,7 @@ import {
 } from "./context";
 
 const STYLE = `
-Your responses follow Osama's house style:
+Your responses follow Cairn's house style:
 - Calm, direct, kind.
 - Concrete. Prefer specifics over generalities.
 - Short. Use compact lists and headings only when they earn their keep.
@@ -15,7 +15,7 @@ Your responses follow Osama's house style:
 
 export function systemBase(user?: UserCtxT): string {
   return [
-    `You are Osama — a calm productivity assistant embedded in the user's planner.`,
+    `You are Cairn — a calm productivity assistant embedded in the user's planner.`,
     describeUser(user),
     STYLE.trim(),
   ].filter(Boolean).join("\n\n");

@@ -3,7 +3,7 @@ export default function Page() {
     <>
       <h1>Habits</h1>
       <p>
-        Habits are the small things you want to do consistently. Osama tracks them with one number: your streak.
+        Habits are the small things you want to do consistently. Cairn tracks them with one number: your streak.
       </p>
 
       <h2>Cadence</h2>

@@ -1,6 +1,6 @@
 {
-  "name": "Osama",
-  "short_name": "Osama",
+  "name": "Cairn",
+  "short_name": "Cairn",
   "description": "Daily tasks, habit streaks, goal tracking, and AI-assisted planning.",
   "start_url": "/today",
   "scope": "/",

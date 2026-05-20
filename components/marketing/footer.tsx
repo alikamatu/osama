@@ -55,7 +55,7 @@ export function MarketingFooter() {
           ))}
         </div>
         <div className="mt-12 flex flex-col items-start justify-between gap-3 text-[12px] text-fg-subtle sm:flex-row sm:items-center">
-          <span>© {new Date().getFullYear()} Osama. Made with care.</span>
+          <span>© {new Date().getFullYear()} Cairn. Made with care.</span>
           <span className="font-mono">v0.1</span>
         </div>
       </div>

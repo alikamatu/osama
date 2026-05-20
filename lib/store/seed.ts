@@ -74,7 +74,7 @@ export function buildSeed(): SeedState {
   const goals: Goal[] = [
     {
       id: nanoid(8),
-      title: "Ship Osama v1",
+      title: "Ship Cairn v1",
       why: "A calm daily driver that I'd actually use myself.",
       horizon: "quarter",
       status: "on-track",
@@ -140,7 +140,7 @@ export function buildSeed(): SeedState {
     },
     {
       id: nanoid(8),
-      title: "Ideas for Osama assistant",
+      title: "Ideas for Cairn assistant",
       body: `## Tools the assistant should call\n- create / complete tasks\n- check off habits\n- summarize the week\n\n## Prompt patterns\n- Plan a day from open tasks + available hours\n- Break a goal into milestones and tasks\n`,
       tags: ["product"],
       taskIds: [], goalIds: [], pinned: false,

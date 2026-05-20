@@ -9,7 +9,7 @@ export default async function ProfileSettings() {
 
   return (
     <div className="space-y-6">
-      <SettingsSection title="Profile" description="How you appear inside Osama.">
+      <SettingsSection title="Profile" description="How you appear inside Cairn.">
         <div className="flex items-center gap-4">
           <span className="block h-14 w-14 overflow-hidden rounded-2xl bg-surface-2">
             {session.avatarUrl && (

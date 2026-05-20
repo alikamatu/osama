@@ -5,7 +5,7 @@ import { removeSubByEndpoint } from "./store";
 
 const PUBLIC  = process.env.VAPID_PUBLIC_KEY;
 const PRIVATE = process.env.VAPID_PRIVATE_KEY;
-const SUBJECT = process.env.VAPID_SUBJECT ?? "mailto:noreply@osama.app";
+const SUBJECT = process.env.VAPID_SUBJECT ?? "mailto:noreply@assistant.alikamatu.com";
 
 let configured = false;
 function ensureConfigured() {

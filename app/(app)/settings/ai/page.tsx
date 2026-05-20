@@ -3,7 +3,7 @@ import { SettingsSection } from "@/components/settings/section";
 export default function AiSettings() {
   return (
     <div className="space-y-6">
-      <SettingsSection title="Assistant" description="How Osama&apos;s assistant behaves.">
+      <SettingsSection title="Assistant" description="How Cairn&apos;s assistant behaves.">
         <p className="text-[13px] text-fg-muted">
           Choose your model, write a custom system prompt, and pin facts to long-term memory — once the
           assistant chat ships.

@@ -13,7 +13,7 @@ export default function DocsIndex() {
     <>
       <h1>Documentation</h1>
       <p>
-        A short, opinionated guide to using Osama well. Start with the daily rhythm, then layer in habits and goals.
+        A short, opinionated guide to using Cairn well. Start with the daily rhythm, then layer in habits and goals.
       </p>
 
       <div className="not-prose mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">

@@ -62,7 +62,7 @@ export function Sidebar({ user }: { user: User }) {
       </header>
 
       {/* Desktop sticky sidebar */}
-      <aside className="hidden md:flex md:w-[248px] md:shrink-0 md:flex-col bg-bg md:sticky md:top-0 md:h-screen md:border-r md:border-surface-1/60 md:overflow-y-auto">
+      <aside className="hidden md:flex md:w-[248px] md:shrink-0 md:flex-col md:self-start md:sticky md:top-0 md:h-[100dvh] md:overflow-y-auto bg-bg md:border-r md:border-surface-1/60">
         <SidebarBody user={user} pathname={pathname} />
       </aside>
 

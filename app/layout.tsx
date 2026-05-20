@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/theme-provider";
@@ -13,16 +13,66 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  process.env.APP_URL ??
+  "https://assistant.alikamatu.com";
+
+const SITE_NAME = "Cairn";
+const TAGLINE = "A calm place to plan, reflect, and progress.";
+const DESCRIPTION =
+  "Cairn is a calm productivity app for daily tasks, habit streaks, long-horizon goals, and journal reviews — with an AI assistant that knows your context.";
+
 export const metadata: Metadata = {
-  title: "Osama — Your personal assistant",
-  description:
-    "Daily tasks, habit streaks, goal tracking, and AI-assisted planning.",
+  metadataBase: new URL(SITE_URL),
+  title: { default: `${SITE_NAME} — ${TAGLINE}`, template: `%s · ${SITE_NAME}` },
+  description: DESCRIPTION,
+  applicationName: SITE_NAME,
+  authors: [{ name: "Cairn" }],
+  generator: "Next.js",
+  keywords: [
+    "productivity app", "habit tracker", "goal tracker", "daily journal",
+    "task manager", "AI assistant", "personal planner", "Pomodoro",
+    "habits", "goals", "reviews", "Cairn",
+  ],
+  category: "productivity",
   manifest: "/manifest.webmanifest",
-  icons: { icon: "/icon.svg", apple: "/icon.svg" },
-  appleWebApp: { capable: true, title: "Osama", statusBarStyle: "black-translucent" },
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/icon.svg" }],
+  },
+  appleWebApp: { capable: true, title: SITE_NAME, statusBarStyle: "black-translucent" },
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} — ${TAGLINE}`,
+    description: DESCRIPTION,
+    url: SITE_URL,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} — ${TAGLINE}`,
+    description: DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true, follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  formatDetection: { telephone: false, address: false, email: false },
 };
 
-export const viewport = {
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
   themeColor: [
     { media: "(prefers-color-scheme: dark)",  color: "#16181f" },
     { media: "(prefers-color-scheme: light)", color: "#fafaf7" },
@@ -32,6 +82,21 @@ export const viewport = {
 const themeBootstrap = `
 (function(){try{var t=localStorage.getItem("osama:theme");if(!t){t="obsidian";}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme="obsidian";}})();
 `;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: SITE_NAME,
+  description: DESCRIPTION,
+  url: SITE_URL,
+  applicationCategory: "ProductivityApplication",
+  operatingSystem: "Web, iOS, Android",
+  offers: [
+    { "@type": "Offer", price: "0",   priceCurrency: "GHS", name: "Free" },
+    { "@type": "Offer", price: "70",  priceCurrency: "GHS", name: "Pro (monthly)" },
+    { "@type": "Offer", price: "640", priceCurrency: "GHS", name: "Pro (yearly)" },
+  ],
+};
 
 export default function RootLayout({
   children,
@@ -45,6 +110,7 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body className="min-h-full bg-bg text-fg">
         <ThemeProvider>{children}</ThemeProvider>

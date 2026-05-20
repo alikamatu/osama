@@ -14,7 +14,7 @@ const PILLARS: Array<{ icon: LucideIcon; title: string; body: string }> = [
 ];
 
 const KEYBOARD: Array<{ icon: LucideIcon; title: string; body: string }> = [
-  { icon: Command,      title: "Command palette", body: "⌘K to jump anywhere, run an action, or ask Osama." },
+  { icon: Command,      title: "Command palette", body: "⌘K to jump anywhere, run an action, or ask Cairn." },
   { icon: Keyboard,     title: "Chord shortcuts", body: "g t for Today, g h for Habits, g g for Goals." },
   { icon: Search,       title: "Quick capture",   body: "Press N from anywhere to add a task, habit, or thought." },
   { icon: CalendarDays, title: "Time-zone aware", body: "Greetings, due dates, and reminders match your day." },
@@ -30,7 +30,7 @@ export function Features() {
           Six pillars. One calm app.
         </h2>
         <p className="mt-3 text-[16px] leading-relaxed text-fg-muted">
-          Osama replaces three apps you toggle between with one that knows them all — and gets out of the way.
+          Cairn replaces three apps you toggle between with one that knows them all — and gets out of the way.
         </p>
       </header>
 
@@ -49,7 +49,7 @@ export function Features() {
       <header className="mt-24 mb-10 max-w-[52ch]">
         <h2 className="text-[28px] font-semibold tracking-[-0.01em] text-fg">Designed for the keyboard.</h2>
         <p className="mt-2 text-[15px] leading-relaxed text-fg-muted">
-          Most of Osama is reachable in two keystrokes.
+          Most of Cairn is reachable in two keystrokes.
         </p>
       </header>
 

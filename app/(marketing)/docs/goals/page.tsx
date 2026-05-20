@@ -23,13 +23,13 @@ export default function Page() {
 
       <h2>Drift</h2>
       <p>
-        Osama watches your goals quietly. If a milestone hasn&apos;t moved in two weeks (or a linked habit&apos;s streak breaks),
+        Cairn watches your goals quietly. If a milestone hasn&apos;t moved in two weeks (or a linked habit&apos;s streak breaks),
         you&apos;ll see an at-risk nudge during your weekly review.
       </p>
 
       <h2>Reviewing</h2>
       <p>
-        At the end of each month, Osama can draft a goal review using your task and habit history. With Pro, the assistant
+        At the end of each month, Cairn can draft a goal review using your task and habit history. With Pro, the assistant
         suggests one concrete next step for any at-risk goal.
       </p>
     </>

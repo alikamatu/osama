@@ -26,7 +26,7 @@ const STEP_SUBS = [
   "Choose a name and an avatar.",
   "A theme you'll see every day.",
   "We'll tailor your dashboard to your timezone and week.",
-  "Welcome to Osama.",
+  "Welcome to Cairn.",
 ];
 
 export function OnboardingWizard({
@@ -176,7 +176,7 @@ export function OnboardingWizard({
             onClick={submit}
             trailingIcon={!pending && <Check size={16} strokeWidth={2.25} />}
           >
-            Enter Osama
+            Enter Cairn
           </Button>
         )}
       </div>

@@ -6,7 +6,7 @@ export default function TermsPage() {
         <p><em>Last updated: May 19, 2026</em></p>
 
         <p>
-          By creating an account on Osama you agree to these terms. They&apos;re intentionally short and readable.
+          By creating an account on Cairn you agree to these terms. They&apos;re intentionally short and readable.
         </p>
 
         <h2>The account</h2>
@@ -17,7 +17,7 @@ export default function TermsPage() {
 
         <h2>Acceptable use</h2>
         <ul>
-          <li>Don&apos;t use Osama to break the law or harm others.</li>
+          <li>Don&apos;t use Cairn to break the law or harm others.</li>
           <li>Don&apos;t attempt to break the service, abuse rate limits, or scrape other users&apos; data.</li>
           <li>Don&apos;t resell access; teams pricing is coming.</li>
         </ul>
@@ -43,7 +43,7 @@ export default function TermsPage() {
 
         <h2>Disclaimers</h2>
         <p>
-          Osama is provided &quot;as is&quot;. We aim for high uptime, but we don&apos;t guarantee it. Our liability for any
+          Cairn is provided &quot;as is&quot;. We aim for high uptime, but we don&apos;t guarantee it. Our liability for any
           claim is capped at the amount you&apos;ve paid us in the last 12 months.
         </p>
 
@@ -53,7 +53,7 @@ export default function TermsPage() {
         </p>
 
         <h2>Contact</h2>
-        <p>Email <a href="mailto:legal@osama.app">legal@osama.app</a>.</p>
+        <p>Email <a href="mailto:legal@assistant.alikamatu.com">legal@assistant.alikamatu.com</a>.</p>
       </article>
     </div>
   );

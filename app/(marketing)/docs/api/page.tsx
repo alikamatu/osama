@@ -3,7 +3,7 @@ export default function Page() {
     <>
       <h1>API reference</h1>
       <p>
-        The Osama API will let you read and write tasks, habits, goals, and notes from your own scripts. It&apos;s on the
+        The Cairn API will let you read and write tasks, habits, goals, and notes from your own scripts. It&apos;s on the
         roadmap right after the persistence layer.
       </p>
 

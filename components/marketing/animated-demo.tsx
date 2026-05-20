@@ -12,7 +12,7 @@ export function AnimatedDemo() {
     <div className="relative overflow-hidden rounded-2xl bg-surface-1 p-4 sm:p-5">
       <div className="flex items-center justify-between">
         <div>
-          <div className="text-[13px] font-semibold text-fg">Good morning, Osama.</div>
+          <div className="text-[13px] font-semibold text-fg">Good morning, Cairn.</div>
           <div className="text-[11px] text-fg-subtle">Tuesday · May 19</div>
         </div>
         <span className="rounded-full bg-surface-2 px-2 py-0.5 font-mono text-[10px] text-fg-muted">8:42</span>

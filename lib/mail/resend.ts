@@ -6,4 +6,4 @@ if (!apiKey) throw new Error("RESEND_API_KEY is not set");
 
 export const resend = new Resend(apiKey);
 export const FROM_EMAIL =
-  process.env.RESEND_FROM_EMAIL ?? "Osama <noreply@allmaphostels.com>";
+  process.env.RESEND_FROM_EMAIL ?? "Cairn <noreply@allmaphostels.com>";

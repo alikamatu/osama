@@ -92,7 +92,7 @@ export default async function BillingSettings({
         </SettingsSection>
       )}
 
-      <SettingsSection title="Invoices" description="Every payment to Osama. Click out for the full Paystack receipt.">
+      <SettingsSection title="Invoices" description="Every payment to Cairn. Click out for the full Paystack receipt.">
         <InvoiceList />
       </SettingsSection>
 

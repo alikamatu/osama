@@ -6,14 +6,14 @@ export default function PrivacyPage() {
         <p><em>Last updated: May 19, 2026</em></p>
 
         <p>
-          This policy describes what data Osama collects, how we use it, and the controls you have. We aim to make this
+          This policy describes what data Cairn collects, how we use it, and the controls you have. We aim to make this
           short and concrete — not a wall of boilerplate.
         </p>
 
         <h2>What we collect</h2>
         <ul>
           <li><strong>Account</strong> — your email address, and any name and avatar you choose during onboarding.</li>
-          <li><strong>Content</strong> — the tasks, habits, goals, notes, and reviews you create inside Osama.</li>
+          <li><strong>Content</strong> — the tasks, habits, goals, notes, and reviews you create inside Cairn.</li>
           <li><strong>Operational metadata</strong> — sign-in events, timezone, theme preference, basic device info.</li>
           <li><strong>Payment</strong> — handled entirely by Paystack. We never see your full card number.</li>
         </ul>
@@ -48,7 +48,7 @@ export default function PrivacyPage() {
 
         <h2>Contact</h2>
         <p>
-          Questions? Email <a href="mailto:privacy@osama.app">privacy@osama.app</a>.
+          Questions? Email <a href="mailto:privacy@assistant.alikamatu.com">privacy@assistant.alikamatu.com</a>.
         </p>
       </article>
     </div>

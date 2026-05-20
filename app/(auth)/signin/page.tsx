@@ -49,7 +49,7 @@ export default async function SignInPage({
         </main>
 
         <footer className="flex items-center justify-between text-[12px] text-fg-subtle">
-          <span>© {new Date().getFullYear()} Osama</span>
+          <span>© {new Date().getFullYear()} Cairn</span>
           <div className="flex gap-4">
             <a href="#" className="hover:text-fg-muted">Help</a>
             <a href="#" className="hover:text-fg-muted">Status</a>

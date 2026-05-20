@@ -19,7 +19,7 @@ export default function Page() {
       <ul>
         <li>Train on your data. Your content is yours; we don&apos;t fine-tune models on it.</li>
         <li>Make changes without confirmation. Destructive actions always ask first.</li>
-        <li>Reach outside Osama. It only sees what&apos;s in your account.</li>
+        <li>Reach outside Cairn. It only sees what&apos;s in your account.</li>
       </ul>
 
       <h2>Slash commands</h2>

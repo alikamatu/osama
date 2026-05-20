@@ -66,7 +66,7 @@ export function CommandPalette({
       return [{
         id: "ask-osama",
         group: "Ask" as CommandGroup,
-        label: `Ask Osama: "${q}"`,
+        label: `Ask Cairn: "${q}"`,
         icon: Sparkles,
         href: `/assistant?q=${encodeURIComponent(q)}`,
       }];
@@ -166,7 +166,7 @@ export function CommandPalette({
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 onKeyDown={onKey}
-                placeholder="Type a command, page, or ask Osama…"
+                placeholder="Type a command, page, or ask Cairn…"
                 className="block h-11 w-full bg-transparent text-[15px] text-fg outline-none placeholder:text-fg-subtle"
                 role="combobox"
                 aria-expanded="true"

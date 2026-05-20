@@ -12,7 +12,7 @@ export async function POST() {
     return NextResponse.json({ error: "no_subscription", detail: "Subscribe this device first." }, { status: 400 });
   }
   const results = await Promise.all(subs.map((s) => sendPush(s.subscription, {
-    title: "Osama",
+    title: "Cairn",
     body: "Push notifications are working. You'll get reminders here.",
     kind: "test",
     url: "/today",
