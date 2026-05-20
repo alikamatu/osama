@@ -1,0 +1,16 @@
+{
+  "name": "Osama",
+  "short_name": "Osama",
+  "description": "Daily tasks, habit streaks, goal tracking, and AI-assisted planning.",
+  "start_url": "/today",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#16181f",
+  "theme_color": "#16181f",
+  "categories": ["productivity", "lifestyle"],
+  "icons": [
+    { "src": "/icon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any" },
+    { "src": "/icon-mask.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "maskable" }
+  ]
+}
