@@ -13,9 +13,16 @@ export function LinkedPicker({
 }: {
   selected: string[];
   onChange: (next: string[]) => void;
-  kind: "tasks" | "habits";
+  kind: "tasks" | "habits" | "goals";
 }) {
-  const items = useStore((s) => (kind === "tasks" ? s.tasks : s.habits));
+  const rawList = useStore((s) =>
+    kind === "tasks" ? s.tasks : kind === "habits" ? s.habits : s.goals,
+  );
+  const items = useMemo(
+    () => (rawList as Array<{ id: string; title?: string; deletedAt?: string | null }>)
+      .filter((x) => !x.deletedAt),
+    [rawList],
+  );
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState("");
 
@@ -24,7 +31,7 @@ export function LinkedPicker({
   const filtered = useMemo(() => {
     if (!q.trim()) return items.slice(0, 20);
     return items
-      .map((i) => ({ i, s: fuzzyScore(q, "title" in i ? i.title : "") }))
+      .map((i) => ({ i, s: fuzzyScore(q, "title" in i ? (i.title ?? "") : "") }))
       .filter((x) => x.s >= 0)
       .sort((a, b) => a.s - b.s)
       .slice(0, 20)
@@ -55,7 +62,7 @@ export function LinkedPicker({
           onClick={() => setOpen(true)}
           className="inline-flex h-7 items-center gap-1 rounded-full bg-surface-2 px-2 text-[12px] font-medium text-fg-muted hover:bg-surface-3 hover:text-fg"
         >
-          <Plus size={12} strokeWidth={2.5} /> Link {kind === "tasks" ? "task" : "habit"}
+          <Plus size={12} strokeWidth={2.5} /> Link {kind === "tasks" ? "task" : kind === "habits" ? "habit" : "goal"}
         </button>
       </div>
 

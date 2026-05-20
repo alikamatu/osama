@@ -19,6 +19,7 @@ const GROUPS: Group[] = [
       { keys: ["g", "c"], label: "Go to Calendar" },
       { keys: ["g", "r"], label: "Go to Reviews" },
       { keys: ["g", "n"], label: "Go to Notes" },
+      { keys: ["g", "j"], label: "Today's journal" },
       { keys: ["g", "s"], label: "Go to Stats" },
       { keys: ["g", "a"], label: "Go to Assistant" },
       { keys: ["g", ","], label: "Open Settings" },

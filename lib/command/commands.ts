@@ -15,7 +15,7 @@ export type Command = {
   icon: LucideIcon;
   /** Either a path (string) or an action key the host runs. */
   href?: string;
-  action?: "new-task" | "new-habit" | "new-goal" | "open-cheatsheet" | "sign-out" | "set-theme";
+  action?: "new-task" | "new-habit" | "new-goal" | "open-cheatsheet" | "sign-out" | "set-theme" | "open-journal";
   payload?: string;
   keywords?: string[];
 };
@@ -30,6 +30,8 @@ export const NAV_COMMANDS: Command[] = [
   { id: "nav-calendar", group: "Navigation", label: "Go to Calendar",  icon: CalendarDays,href: "/calendar",  shortcut: ["g","c"] },
   { id: "nav-reviews",  group: "Navigation", label: "Go to Reviews",   icon: NotebookPen, href: "/reviews",   shortcut: ["g","r"] },
   { id: "nav-stats",    group: "Navigation", label: "Go to Stats",     icon: LineChart,   href: "/stats",     shortcut: ["g","s"] },
+  { id: "nav-notes",    group: "Navigation", label: "Go to Notes",     icon: NotebookPen, href: "/notes",     shortcut: ["g","n"] },
+  { id: "nav-journal",  group: "Navigation", label: "Today's journal", icon: NotebookPen, action: "open-journal", shortcut: ["g","j"], keywords: ["diary","write","reflect","today"] },
   { id: "nav-asst",     group: "Navigation", label: "Go to Assistant", icon: Sparkles,    href: "/assistant", shortcut: ["g","a"] },
   { id: "nav-settings", group: "Navigation", label: "Open Settings",   icon: Settings,    href: "/settings/profile", shortcut: ["g",","] },
 ];

@@ -67,3 +67,44 @@ export function diagnoseSystem(user?: UserCtxT): string {
     `Be honest. If progress looks fine, say so.`,
   ].join("\n\n");
 }
+
+export type NoteAssistMode =
+  | "continue"
+  | "summarize"
+  | "improve"
+  | "outline"
+  | "plan"
+  | "ask"
+  | "expand"
+  | "journal-prompts";
+
+const NOTE_BASE = [
+  `# Mode: Note assistant`,
+  `You are editing inside the user's note. Stay within scope — don't invent unrelated content.`,
+  `Output markdown only. NO surrounding prose ("Here is..."), NO code fences around the output, NO sign-offs.`,
+  `When a list or schedule is the right form, use it; otherwise paragraphs.`,
+].join("\n");
+
+export function noteSystem(mode: NoteAssistMode, user?: UserCtxT, ctx?: {
+  tasks?: TaskCtxT[]; habits?: HabitCtxT[]; goals?: GoalCtxT[];
+}): string {
+  const intent = {
+    "continue":        `Continue writing in the user's voice from where the note ends. Add 2–6 sentences. Don't repeat existing content.`,
+    "summarize":       `Summarize the note into 3–5 bullet points capturing the key ideas, decisions, and any open questions.`,
+    "improve":         `Rewrite the note for clarity and concision. Keep meaning, structure, and markdown formatting. Don't add new ideas.`,
+    "outline":         `Turn the note into a structured outline using ## sections and bullet points. Preserve every meaningful point from the source.`,
+    "plan":            `Produce a concrete plan. Use a "## Plan" heading and 3–7 actionable steps as a numbered list. Time-box each step if the user mentioned time. Reference the user's existing tasks/habits/goals when relevant — by exact title, not invented ones.`,
+    "ask":             `Answer the user's instruction grounded in the note content and their context. Stay in the user's note style.`,
+    "expand":          `Expand any underdeveloped section of the note with concrete detail. Don't change finished sections.`,
+    "journal-prompts": `Offer 4–6 short, specific journal prompts the user could answer today. Each prompt is a single sentence ending with a question mark. Output as a markdown bullet list — no preamble.`,
+  }[mode];
+
+  const ctxBlock = ctx ? [
+    `# Context (do not fabricate)`,
+    describeTasks(ctx.tasks ?? []),
+    describeHabits(ctx.habits ?? []),
+    describeGoals(ctx.goals ?? []),
+  ].join("\n\n") : "";
+
+  return [systemBase(user), NOTE_BASE, intent, ctxBlock].filter(Boolean).join("\n\n");
+}

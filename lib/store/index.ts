@@ -50,6 +50,8 @@ type State = {
   addNote: (p?: Partial<Note>) => Note;
   updateNote: (id: string, patch: Partial<Note>) => void;
   deleteNote: (id: string) => void;
+  /** Return today's journal note for the given timezone, creating it if missing. */
+  getOrCreateTodaysJournal: (timezone?: string) => Note;
 
   // reviews
   saveReview: (kind: ReviewKind, periodStart: string, content: Record<string, string>) => Review;
@@ -249,6 +251,30 @@ export const useStore = create<State>()(
           })),
         deleteNote: (id) =>
           set((s) => ({ notes: s.notes.map((n) => (n.id === id ? { ...n, deletedAt: now() } : n)) })),
+        getOrCreateTodaysJournal: (timezone) => {
+          const tz = timezone || "UTC";
+          const ymd = (() => {
+            try {
+              return new Intl.DateTimeFormat("en-CA", {
+                timeZone: tz, year: "numeric", month: "2-digit", day: "2-digit",
+              }).format(new Date());
+            } catch { return new Date().toISOString().slice(0, 10); }
+          })();
+          const tag = `journal-${ymd}`;
+          const existing = get().notes.find((n) => !n.deletedAt && n.tags.includes(tag));
+          if (existing) return existing;
+          const niceDate = new Intl.DateTimeFormat("en-US", {
+            weekday: "long", year: "numeric", month: "long", day: "numeric", timeZone: tz,
+          }).format(new Date());
+          const seed = `# Journal · ${niceDate}\n\n## What mattered today\n- \n\n## What I'm grateful for\n- \n\n## Tomorrow's one thing\n- \n`;
+          const created = (get().addNote)({
+            title: `Journal · ${niceDate}`,
+            body: seed,
+            tags: ["journal", tag],
+            pinned: false,
+          });
+          return created;
+        },
 
         // ─── reviews ─────────────────────────────────────────────
         saveReview: (kind, periodStart, content) => {

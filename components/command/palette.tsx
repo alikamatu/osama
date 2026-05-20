@@ -10,6 +10,7 @@ import {
 } from "@/lib/command/commands";
 import { useTheme } from "@/components/theme/theme-provider";
 import { getRecentRoutes } from "@/components/keyboard/keyboard-provider";
+import { useStore } from "@/lib/store";
 import type { ThemeId } from "@/lib/theme/themes";
 import { cn } from "@/lib/utils/cn";
 
@@ -105,6 +106,12 @@ export function CommandPalette({
       case "new-goal":
         window.dispatchEvent(new KeyboardEvent("keydown", { key: "n" }));
         return;
+      case "open-journal": {
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const j = useStore.getState().getOrCreateTodaysJournal(tz);
+        router.push(`/notes/${j.id}`);
+        return;
+      }
     }
   }
 

@@ -83,6 +83,11 @@ export function KeyboardProvider({ children }: { children: React.ReactNode }) {
     c: () => router.push("/calendar"),
     r: () => router.push("/reviews"),
     n: () => router.push("/notes"),
+    j: () => {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const j = useStore.getState().getOrCreateTodaysJournal(tz);
+      router.push(`/notes/${j.id}`);
+    },
     s: () => router.push("/stats"),
     a: () => router.push("/assistant"),
     ",": () => router.push("/settings/profile"),
