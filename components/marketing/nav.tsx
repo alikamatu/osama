@@ -17,9 +17,7 @@ export function MarketingNav() {
   return (
     <header className="sticky top-0 z-30 bg-bg/95">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <Link href="/" className="inline-flex" aria-label="Cairn home">
-          <Logo size={26} withWordmark />
-        </Link>
+        <Logo size={26} withWordmark href="/" aria-label="Cairn home" className="inline-flex" />
         <nav className="hidden items-center gap-1 md:flex">
           {ITEMS.map((it) => {
             const active = pathname === it.href || pathname.startsWith(it.href + "/");

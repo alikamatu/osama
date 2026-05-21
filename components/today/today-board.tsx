@@ -7,6 +7,8 @@ import { Topbar } from "@/components/app/topbar";
 import { Pomodoro } from "./pomodoro";
 import { PlanMyDayModal } from "./plan-my-day";
 import { DailyQuote } from "./daily-quote";
+import { NewsWidget } from "./news";
+import { BreathingWidget } from "./breathing";
 import { useKeyboard } from "@/components/keyboard/keyboard-provider";
 import { useStore } from "@/lib/store";
 import { useLiveTasks, useLiveHabits } from "@/lib/store/selectors";
@@ -54,7 +56,7 @@ export function TodayBoard({ greeting, date }: { greeting: string; date: string 
       />
 
       <div className="grid grid-cols-1 gap-6 px-6 pb-10 md:px-10 lg:grid-cols-[1fr_320px]">
-        <main className="space-y-6">
+        <main className="space-y-6 min-w-0">
           <DailyQuote />
 
           <div className="grid grid-cols-2 gap-3">
@@ -70,11 +72,14 @@ export function TodayBoard({ greeting, date }: { greeting: string; date: string 
             onDelete={remove}
             onReorder={(ordered) => reorder(ordered.map((t) => t.id))}
           />
+          
+          <NewsWidget />
         </main>
 
         <aside className="space-y-6">
           <Pomodoro />
           <SchedulePreview tasks={todayTasks} />
+          <BreathingWidget />
         </aside>
       </div>
 
@@ -107,7 +112,7 @@ function HabitsRow({ habits, onToggle }: { habits: Habit[]; onToggle: (id: strin
   return (
     <section>
       <SectionHead title="Today's habits" hint={`${habits.length} tracked`} />
-      <div className="-mx-1 mt-3 flex gap-3 overflow-x-auto px-1 pb-1">
+      <div className="-mx-1 mt-3 flex gap-3 overflow-x-auto px-1 pb-4 scrollbar-hide [&::-webkit-scrollbar]:hidden">
         {habits.map((h) => {
           const done = isDoneToday(h);
           const streak = currentStreak(h);

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   CalendarDays, CheckSquare, Flag, Folder, Inbox, LayoutGrid, Menu, X,
-  LineChart, NotebookPen, Search, Sparkles, Sun, Repeat, LogOut, Zap,
+  LineChart, NotebookPen, Search, Sparkles, Sun, Repeat, LogOut, Zap, StickyNote,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { Logo } from "@/components/brand/logo";
@@ -20,6 +20,7 @@ const PRIMARY: Item[] = [
   { href: "/today",     label: "Today",     icon: Sun,         key: "g t" },
   { href: "/inbox",     label: "Inbox",     icon: Inbox,       key: "g i" },
   { href: "/tasks",     label: "Tasks",     icon: CheckSquare, key: "g k" },
+  { href: "/notes",     label: "Notes",     icon: StickyNote,  key: "g n" },
   { href: "/projects",  label: "Projects",  icon: Folder,      key: "g p" },
   { href: "/habits",    label: "Habits",    icon: Repeat,      key: "g h" },
   { href: "/goals",     label: "Goals",     icon: Flag,        key: "g g" },
@@ -53,7 +54,7 @@ export function Sidebar({ user }: { user: User }) {
         >
           <Menu size={16} strokeWidth={2} />
         </button>
-        <Link href="/today" className="ml-1"><Logo size={22} withWordmark /></Link>
+        <Logo size={22} withWordmark href="/today" className="ml-1" />
         <span className="ml-auto inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-surface-1">
           {user.avatarUrl && (
             <Image src={user.avatarUrl} alt="" width={32} height={32} unoptimized className="h-full w-full object-cover" />

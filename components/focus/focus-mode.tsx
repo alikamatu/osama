@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import {
-  Brain, Check, ChevronDown, Coffee, Pause, Play, RotateCcw, X,
+  Brain, Check, ChevronDown, Coffee, Pause, Play, RotateCcw, X, Settings2, Minus, Plus,
 } from "lucide-react";
 import { useStore } from "@/lib/store";
 import { cn } from "@/lib/utils/cn";
@@ -14,6 +14,10 @@ import type { Task } from "@/types/entities";
 const STORAGE_KEY = "osama:pomodoro:v1";
 type Mode = "focus" | "break";
 const DEFAULTS = { focus: 25, break: 5 } as const;
+const PRESETS = {
+  focus: [15, 25, 45, 60],
+  break: [5, 10, 15],
+} as const;
 
 function clamp(n: number, lo: number, hi: number) {
   return Math.max(lo, Math.min(hi, Math.round(n)));
@@ -280,6 +284,7 @@ export function FocusMode({ open, onClose }: { open: boolean; onClose: () => voi
   const [mode, setMode]         = useState<Mode>("focus");
   const [remaining, setRemaining] = useState(DEFAULTS.focus * 60);
   const [running, setRunning]   = useState(false);
+  const [editing, setEditing]   = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [pickerOpen, setPickerOpen] = useState(false);
 
@@ -297,6 +302,11 @@ export function FocusMode({ open, onClose }: { open: boolean; onClose: () => voi
     setSettings(s);
     setRemaining(s.focus * 60);
   }, []);
+
+  // Persist settings whenever they change.
+  useEffect(() => {
+    try { window.localStorage.setItem(STORAGE_KEY, JSON.stringify(settings)); } catch {}
+  }, [settings]);
 
   // Auto-select first open task when first opened
   useEffect(() => {
@@ -363,6 +373,12 @@ export function FocusMode({ open, onClose }: { open: boolean; onClose: () => voi
     setRemaining(settings[next] * 60);
   }
 
+  function applySettings(next: { focus: number; break: number }) {
+    setSettings(next);
+    setRunning(false);
+    setRemaining(next[mode] * 60);
+  }
+
   function markTaskDone() {
     if (!selectedId) return;
     toggleTask(selectedId);
@@ -395,14 +411,28 @@ export function FocusMode({ open, onClose }: { open: boolean; onClose: () => voi
               <Brain size={15} strokeWidth={1.75} className="text-accent" />
               Focus Mode
             </span>
-            <button
-              type="button"
-              onClick={onClose}
-              aria-label="Exit focus mode"
-              className="grid h-9 w-9 place-items-center rounded-md text-fg-subtle transition-colors hover:bg-surface-1 hover:text-fg"
-            >
-              <X size={18} strokeWidth={2} />
-            </button>
+            <div className="flex items-center gap-1">
+              <button
+                type="button"
+                onClick={() => setEditing((v) => !v)}
+                aria-label="Customize timer"
+                aria-pressed={editing}
+                className={cn(
+                  "grid h-9 w-9 place-items-center rounded-md text-fg-subtle transition-colors hover:bg-surface-1 hover:text-fg",
+                  editing && "bg-surface-1 text-fg",
+                )}
+              >
+                <Settings2 size={16} strokeWidth={2} />
+              </button>
+              <button
+                type="button"
+                onClick={onClose}
+                aria-label="Exit focus mode"
+                className="grid h-9 w-9 place-items-center rounded-md text-fg-subtle transition-colors hover:bg-surface-1 hover:text-fg"
+              >
+                <X size={18} strokeWidth={2} />
+              </button>
+            </div>
           </div>
 
           {/* Body */}
@@ -435,8 +465,62 @@ export function FocusMode({ open, onClose }: { open: boolean; onClose: () => voi
               ))}
             </div>
 
-            {/* SVG timer ring */}
-            <TimerRing pct={pct} running={running} mode={mode} mm={mm} ss={ss} />
+            {/* SVG timer ring or Editor */}
+            <AnimatePresence initial={false} mode="wait">
+              {editing ? (
+                <motion.div
+                  key="editor"
+                  initial={{ opacity: 0, y: -6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                  className="space-y-6 rounded-2xl bg-surface-1 p-6 w-[280px]"
+                >
+                  <DurationField
+                    label="Focus"
+                    value={settings.focus}
+                    presets={PRESETS.focus}
+                    min={1}
+                    max={180}
+                    onChange={(v) => applySettings({ ...settings, focus: v })}
+                  />
+                  <DurationField
+                    label="Break"
+                    value={settings.break}
+                    presets={PRESETS.break}
+                    min={1}
+                    max={60}
+                    onChange={(v) => applySettings({ ...settings, break: v })}
+                  />
+                  <div className="flex items-center justify-end gap-2 pt-2">
+                    <button
+                      type="button"
+                      onClick={() => { applySettings({ ...DEFAULTS }); }}
+                      className="inline-flex h-8 items-center rounded-md bg-surface-2 px-2.5 text-[12px] font-medium text-fg-muted hover:bg-surface-3 hover:text-fg"
+                    >
+                      Reset
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setEditing(false)}
+                      className="inline-flex h-8 items-center gap-1 rounded-md bg-accent px-2.5 text-[12px] font-semibold text-accent-fg"
+                    >
+                      <Check size={12} strokeWidth={2.5} /> Done
+                    </button>
+                  </div>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="timer"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.18 }}
+                >
+                  <TimerRing pct={pct} running={running} mode={mode} mm={mm} ss={ss} />
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {/* Task picker */}
             <div ref={pickerRef} className="relative w-full max-w-xs">
@@ -576,5 +660,74 @@ export function FocusMode({ open, onClose }: { open: boolean; onClose: () => voi
         </motion.div>
       )}
     </AnimatePresence>
+  );
+}
+
+function DurationField({
+  label, value, presets, min, max, onChange,
+}: {
+  label: string;
+  value: number;
+  presets: readonly number[];
+  min: number;
+  max: number;
+  onChange: (v: number) => void;
+}) {
+  function bump(delta: number) { onChange(clamp(value + delta, min, max)); }
+  return (
+    <div>
+      <div className="mb-1.5 flex items-baseline justify-between">
+        <span className="text-[11px] font-medium uppercase tracking-[0.16em] text-fg-subtle">{label}</span>
+        <span className="font-mono text-[11px] text-fg-muted">{min}–{max} min</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={() => bump(-5)}
+          aria-label={`Decrease ${label}`}
+          className="grid h-9 w-9 place-items-center rounded-md bg-surface-2 text-fg-muted hover:bg-surface-3 hover:text-fg"
+        >
+          <Minus size={13} strokeWidth={2.25} />
+        </button>
+        <input
+          type="number"
+          inputMode="numeric"
+          value={value}
+          min={min}
+          max={max}
+          onChange={(e) => {
+            const n = Number(e.target.value);
+            if (Number.isFinite(n)) onChange(clamp(n, min, max));
+          }}
+          className="h-9 w-16 rounded-md bg-surface-2 text-center font-mono text-[14px] font-semibold text-fg outline-none focus:bg-surface-3"
+          aria-label={`${label} minutes`}
+        />
+        <button
+          type="button"
+          onClick={() => bump(5)}
+          aria-label={`Increase ${label}`}
+          className="grid h-9 w-9 place-items-center rounded-md bg-surface-2 text-fg-muted hover:bg-surface-3 hover:text-fg"
+        >
+          <Plus size={13} strokeWidth={2.25} />
+        </button>
+        <span className="text-[12px] text-fg-subtle">min</span>
+      </div>
+      <div className="mt-2 flex flex-wrap gap-1.5">
+        {presets.map((p) => (
+          <button
+            key={p}
+            type="button"
+            onClick={() => onChange(p)}
+            aria-pressed={value === p}
+            className={cn(
+              "h-7 rounded-full px-2.5 text-[11.5px] font-medium",
+              value === p ? "bg-accent text-accent-fg" : "bg-surface-2 text-fg-muted hover:text-fg",
+            )}
+          >
+            {p}m
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }

@@ -2,14 +2,23 @@
 
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils/cn";
+import Link from "next/link";
 
-export function Logo({ size = 28, withWordmark = false, className }: {
+export function Logo({
+  size = 28,
+  withWordmark = false,
+  className,
+  href = "/",
+  "aria-label": ariaLabel,
+}: {
   size?: number;
   withWordmark?: boolean;
   className?: string;
+  href?: string | null;
+  "aria-label"?: string;
 }) {
-  return (
-    <div className={cn("inline-flex items-center gap-2.5", className)}>
+  const content = (
+    <>
       <motion.svg
         width={size}
         height={size}
@@ -22,7 +31,7 @@ export function Logo({ size = 28, withWordmark = false, className }: {
       >
         <defs>
           <linearGradient id="o-grad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-            <stop offset="0%"  stopColor="var(--accent)" />
+            <stop offset="0%" stopColor="var(--accent)" />
             <stop offset="100%" stopColor="var(--accent)" stopOpacity="0.55" />
           </linearGradient>
         </defs>
@@ -48,6 +57,27 @@ export function Logo({ size = 28, withWordmark = false, className }: {
           cairn
         </span>
       )}
-    </div>
+    </>
+  );
+
+  if (href === null) {
+    return (
+      <div
+        className={cn("inline-flex items-center gap-2.5", className)}
+        aria-label={ariaLabel}
+      >
+        {content}
+      </div>
+    );
+  }
+
+  return (
+    <Link
+      href={href}
+      className={cn("inline-flex items-center gap-2.5 cursor-pointer hover:opacity-95 transition-opacity duration-150", className)}
+      aria-label={ariaLabel}
+    >
+      {content}
+    </Link>
   );
 }
