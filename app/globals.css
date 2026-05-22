@@ -113,6 +113,30 @@
 }
 
 html, body { height: 100%; }
+html { scroll-behavior: smooth; }
+
+/* App-wide micro-motion polish — every plain element gets a soft response
+   instead of a hard snap. Components needing custom timing override locally. */
+* {
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Themed scrollbars — calm, no decoration. */
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch, var(--fg-subtle) 22%, transparent);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklch, var(--fg-subtle) 38%, transparent);
+  background-clip: padding-box;
+}
+* { scrollbar-color: color-mix(in oklch, var(--fg-subtle) 22%, transparent) transparent; }
 
 body {
   background: var(--bg);

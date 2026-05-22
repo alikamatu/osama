@@ -6,6 +6,7 @@ import { Hydrated } from "@/components/store/hydrated";
 import { StoreSync } from "@/components/store/sync";
 import { ConfirmProvider } from "@/components/ui/confirm";
 import { ServiceWorkerRegister } from "@/components/pwa/sw-register";
+import { PageMotion } from "@/components/motion/page-motion";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const session = await getSession();
@@ -32,7 +33,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         <main id="main" className="flex min-h-screen flex-1 flex-col pt-14 md:pt-0">
           <Hydrated fallback={<AppSkeleton />}>
             <StoreSync />
-            {children}
+            <PageMotion>{children}</PageMotion>
           </Hydrated>
         </main>
       </div>

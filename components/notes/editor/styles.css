@@ -1,0 +1,185 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   Tiptap editor — themed styling.
+   Targets `.cairn-editor .ProseMirror`, mounted by the Editor component.
+   No glass, no border colors, no blur — per the project's golden rules.
+   ─────────────────────────────────────────────────────────────────────────────*/
+
+.cairn-editor .ProseMirror {
+  outline: none;
+  caret-color: var(--accent);
+  color: var(--fg);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: -0.005em;
+  min-height: 60vh;
+  padding-bottom: 12vh;
+}
+
+.cairn-editor .ProseMirror > * + * {
+  margin-top: 0.75em;
+}
+
+/* Headings */
+.cairn-editor .ProseMirror h1 {
+  font-size: 1.8em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+  margin-top: 1.4em;
+  color: var(--fg);
+}
+.cairn-editor .ProseMirror h2 {
+  font-size: 1.4em;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  margin-top: 1.6em;
+  color: var(--fg);
+}
+.cairn-editor .ProseMirror h3 {
+  font-size: 1.15em;
+  font-weight: 600;
+  line-height: 1.35;
+  margin-top: 1.4em;
+  color: var(--fg);
+}
+.cairn-editor .ProseMirror h1:first-child,
+.cairn-editor .ProseMirror h2:first-child,
+.cairn-editor .ProseMirror h3:first-child {
+  margin-top: 0;
+}
+
+/* Paragraphs */
+.cairn-editor .ProseMirror p {
+  color: var(--fg);
+}
+
+/* Inline */
+.cairn-editor .ProseMirror strong { color: var(--fg); font-weight: 600; }
+.cairn-editor .ProseMirror em { color: var(--fg); font-style: italic; }
+.cairn-editor .ProseMirror s { color: var(--fg-subtle); }
+.cairn-editor .ProseMirror code {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.9em;
+  background: var(--surface-2);
+  padding: 1px 6px;
+  border-radius: 5px;
+}
+.cairn-editor .ProseMirror a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+}
+
+/* Code block */
+.cairn-editor .ProseMirror pre {
+  background: var(--surface-2);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin: 1em 0;
+  overflow-x: auto;
+}
+.cairn-editor .ProseMirror pre code {
+  background: transparent;
+  padding: 0;
+  font-size: 0.85em;
+  color: var(--fg);
+}
+
+/* Lists */
+.cairn-editor .ProseMirror ul,
+.cairn-editor .ProseMirror ol {
+  padding-left: 1.5em;
+}
+.cairn-editor .ProseMirror ul { list-style: disc; }
+.cairn-editor .ProseMirror ol { list-style: decimal; }
+.cairn-editor .ProseMirror li { margin: 0.25em 0; }
+.cairn-editor .ProseMirror li > p { margin: 0; }
+
+/* Task lists */
+.cairn-editor .ProseMirror ul[data-type="taskList"] {
+  list-style: none;
+  padding-left: 0;
+}
+.cairn-editor .ProseMirror ul[data-type="taskList"] li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55em;
+}
+.cairn-editor .ProseMirror ul[data-type="taskList"] li > label {
+  margin-top: 0.32em;
+  user-select: none;
+}
+.cairn-editor .ProseMirror ul[data-type="taskList"] li > label input[type="checkbox"] {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background: var(--surface-2);
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  transition: background 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cairn-editor .ProseMirror ul[data-type="taskList"] li > label input[type="checkbox"]:checked {
+  background: var(--accent);
+}
+.cairn-editor .ProseMirror ul[data-type="taskList"] li > label input[type="checkbox"]:checked::after {
+  content: "";
+  width: 9px;
+  height: 9px;
+  background: var(--accent-fg);
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+.cairn-editor .ProseMirror ul[data-type="taskList"] li[data-checked="true"] > div p {
+  color: var(--fg-subtle);
+  text-decoration: line-through;
+}
+
+/* Blockquote */
+.cairn-editor .ProseMirror blockquote {
+  padding-left: 1em;
+  margin: 1em 0;
+  color: var(--fg-muted);
+  position: relative;
+}
+.cairn-editor .ProseMirror blockquote::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.25em;
+  bottom: 0.25em;
+  width: 3px;
+  border-radius: 3px;
+  background: var(--accent);
+  opacity: 0.55;
+}
+
+/* Horizontal rule */
+.cairn-editor .ProseMirror hr {
+  border: 0;
+  height: 1px;
+  background: var(--hairline);
+  margin: 2em 0;
+}
+
+/* Placeholder */
+.cairn-editor .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: var(--fg-subtle);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Selection highlight */
+.cairn-editor .ProseMirror ::selection {
+  background: color-mix(in oklch, var(--accent) 28%, transparent);
+  color: var(--fg);
+}
+
+/* Focus mode — distraction-free; only the current paragraph stays fully opaque */
+.cairn-editor.focus-on .ProseMirror > * { transition: opacity 380ms cubic-bezier(0.22, 1, 0.36, 1); opacity: 0.32; }
+.cairn-editor.focus-on .ProseMirror > .has-focus { opacity: 1; }

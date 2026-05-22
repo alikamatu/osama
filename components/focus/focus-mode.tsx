@@ -3,10 +3,12 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import {
-  Brain, Check, ChevronDown, Coffee, Pause, Play, RotateCcw, X, Settings2, Minus, Plus,
+  Brain, Check, ChevronDown, Cloud, CloudOff, Coffee, Pause, Play, RotateCcw, X, Settings2, Minus, Plus,
 } from "lucide-react";
 import { useStore } from "@/lib/store";
 import { cn } from "@/lib/utils/cn";
+import { useRainSound } from "@/hooks/use-rain-sound";
+import { FocusWaves } from "@/components/focus/focus-waves";
 import type { Task } from "@/types/entities";
 
 // ── Settings (shared storage key with the Pomodoro widget) ───────────────
@@ -315,10 +317,16 @@ export function FocusMode({ open, onClose }: { open: boolean; onClose: () => voi
     }
   }, [open, selectedId, openTasks]);
 
-  // Pause when overlay hides
+  // Ambient rain sound — synthesised via WebAudio.
+  const rain = useRainSound();
+
+  // Pause timer + rain when overlay hides.
   useEffect(() => {
-    if (!open) setRunning(false);
-  }, [open]);
+    if (!open) {
+      setRunning(false);
+      rain.stop();
+    }
+  }, [open, rain]);
 
   // Timer tick
   useEffect(() => {
@@ -403,15 +411,66 @@ export function FocusMode({ open, onClose }: { open: boolean; onClose: () => voi
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.98 }}
           transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-0 z-[60] flex flex-col bg-bg"
+          className="fixed inset-0 z-[60] flex flex-col overflow-hidden bg-bg"
         >
+          {/* Animated SVG waves at the bottom — calm visual ambience */}
+          <FocusWaves />
+
           {/* Top bar */}
-          <div className="flex items-center justify-between px-6 py-4">
+          <div className="relative z-10 flex items-center justify-between px-6 py-4">
             <span className="inline-flex items-center gap-2 text-[13px] font-semibold text-fg-muted">
               <Brain size={15} strokeWidth={1.75} className="text-accent" />
               Focus Mode
             </span>
             <div className="flex items-center gap-1">
+              {rain.supported && (
+                <motion.button
+                  type="button"
+                  onClick={rain.toggle}
+                  aria-label={rain.playing ? "Stop rain ambience" : "Play rain ambience"}
+                  aria-pressed={rain.playing}
+                  whileTap={{ scale: 0.92 }}
+                  className={cn(
+                    "relative grid h-9 w-9 place-items-center rounded-md transition-colors",
+                    rain.playing
+                      ? "bg-accent/15 text-accent"
+                      : "text-fg-subtle hover:bg-surface-1 hover:text-fg",
+                  )}
+                  title={rain.playing ? "Rain on" : "Rain off"}
+                >
+                  <AnimatePresence mode="wait" initial={false}>
+                    {rain.playing ? (
+                      <motion.span
+                        key="on"
+                        initial={{ opacity: 0, scale: 0.6, rotate: -8 }}
+                        animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                        exit={{ opacity: 0, scale: 0.6, rotate: 8 }}
+                        transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        <Cloud size={16} strokeWidth={2} />
+                      </motion.span>
+                    ) : (
+                      <motion.span
+                        key="off"
+                        initial={{ opacity: 0, scale: 0.6, rotate: -8 }}
+                        animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                        exit={{ opacity: 0, scale: 0.6, rotate: 8 }}
+                        transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        <CloudOff size={16} strokeWidth={2} />
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                  {rain.playing && (
+                    <motion.span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0 rounded-md"
+                      animate={{ boxShadow: ["0 0 0 0 var(--accent)", "0 0 0 4px transparent"] }}
+                      transition={{ duration: 1.6, repeat: Infinity, ease: "easeOut" }}
+                    />
+                  )}
+                </motion.button>
+              )}
               <button
                 type="button"
                 onClick={() => setEditing((v) => !v)}
@@ -436,7 +495,7 @@ export function FocusMode({ open, onClose }: { open: boolean; onClose: () => voi
           </div>
 
           {/* Body */}
-          <div className="flex flex-1 flex-col items-center justify-center gap-8 px-6 pb-10">
+          <div className="relative z-10 flex flex-1 flex-col items-center justify-center gap-8 px-6 pb-10">
 
             {/* Mode chip switcher */}
             <div className="flex items-center gap-1 rounded-full bg-surface-1 p-1">
